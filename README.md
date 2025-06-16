@@ -1,4 +1,4 @@
-
+ (Building in progess)
 # 🎟️ Accessly – Decentralized Event Ticketing DApp
 
 Accessly is a modern Web3-native ticketing platform that empowers users to create, buy, and verify event tickets using blockchain technology. By minting tickets as NFTs, Accessly brings **transparency**, **ownership**, and **trust** into the event ticketing ecosystem.
@@ -15,7 +15,7 @@ Current Web2 ticketing platforms suffer from:
 
 ---
 
-## ✅ Our Web3 Solution
+## ✅ My Web3 Solution
 
 Accessly ensures:
 - ✅ Tickets minted as **NFTs** (ERC721 or ERC1155)

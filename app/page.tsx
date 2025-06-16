@@ -1,9 +1,14 @@
+import HeroSection from "./components/HeroSection";
+import MintTicketForm from "./components/MintForm";
 
 
 export default function Home() {
   return (
-    <div>
-      <h1>Accesly</h1>
+    <div className="">
+     
+      <HeroSection/>
+      <MintTicketForm/>
+  
     </div>
   );
 }

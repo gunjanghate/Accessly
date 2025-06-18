@@ -4,10 +4,11 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Wallet, ChevronDown, Copy, ExternalLink, LogOut, Check } from 'lucide-react';
 import { connectWallet, getBalance } from '@/lib/wallet';
-
+import { useRouter } from 'next/navigation';
 const ADDRESS_KEY = 'wallet_address';
 
 export default function WalletButton() {
+    const router = useRouter();
     const [address, setAddress] = useState<string | null>(null);
     const [balance, setBalance] = useState<string | null>(null);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -146,7 +147,16 @@ export default function WalletButton() {
                             <div className="px-3 py-2 text-xs text-gray-500 uppercase tracking-wide font-semibold">
                                 Account
                             </div>
-                            
+                            <button onClick={() => {
+                                router.push("/my-events")
+                            }
+                            }
+                                className="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-gray-50 rounded-lg transition-colors duration-150"
+                            >
+
+                                Your Events
+                            </button>
+
                             <button
                                 onClick={copyAddress}
                                 className="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-gray-50 rounded-lg transition-colors duration-150"
@@ -164,7 +174,7 @@ export default function WalletButton() {
                                 </div>
                             </button>
 
-                            <button 
+                            <button
                                 onClick={openInExplorer}
                                 className="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-gray-50 rounded-lg transition-colors duration-150"
                             >

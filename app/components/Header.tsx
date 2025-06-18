@@ -45,10 +45,10 @@ const Header = () => {
             transition={{ delay: 0.3, duration: 0.5 }}
             className="hidden md:flex items-center space-x-8"
           >
-            <Link href="#" className="text-gray-800 hover:text-indigo-600 font-medium hover:underline hover:decoration-violet-500 text-lg transition-all duration-500">
+            <Link href="/events" className="text-gray-800 hover:text-indigo-600 font-medium hover:underline hover:decoration-violet-500 text-lg transition-all duration-500">
               Events
             </Link>
-            <Link href="#" className="text-gray-800 hover:text-indigo-600 font-medium hover:underline hover:decoration-violet-500 text-lg transition-all duration-500">
+            <Link href="/my-tickets" className="text-gray-800 hover:text-indigo-600 font-medium hover:underline hover:decoration-violet-500 text-lg transition-all duration-500">
               My Tickets
             </Link>
             <Link href={"/create-ticket"} className="text-gray-800 hover:text-indigo-600 font-medium hover:underline hover:decoration-violet-500 text-lg transition-all duration-500">

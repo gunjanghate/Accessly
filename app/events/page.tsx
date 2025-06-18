@@ -56,6 +56,7 @@ export default function EventsPage() {
                 owner: token.owner,
               } as EventMetadata;
             } catch (err) {
+              console.log(err)
               console.warn(`Skipping token ${token.tokenId} due to metadata error`);
               return null;
             }

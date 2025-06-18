@@ -7,14 +7,17 @@ import {
   Zap, 
   Globe, 
   QrCode, 
-
   ArrowRight, 
   CheckCircle, 
 
   Sparkles
 } from 'lucide-react';
+import { Edu_AU_VIC_WA_NT_Guides } from 'next/font/google';
 import { useRouter } from 'next/navigation';
-
+const heroFont = Edu_AU_VIC_WA_NT_Guides({
+  variable: "--font-eb-gramond",
+  subsets: ["latin"],
+});
 const HeroSection = () => {
     const router = useRouter();
   const [isVisible, setIsVisible] = React.useState(false);
@@ -115,7 +118,7 @@ const HeroSection = () => {
             variants={itemVariants}
             className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight flex flex-col"
           >
-            <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text font-semibold italic text-transparent text-6xl py-2">
+            <span  className={` ${heroFont.variable} bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text font-semibold italic text-transparent text-6xl py-2`}>
               Accessly
             </span>
            

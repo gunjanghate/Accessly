@@ -6,7 +6,7 @@ import { getTokensByOwner } from "@/lib/getTokensByOwner";
 import { motion, AnimatePresence } from "framer-motion";
 export default function ProfilePage() {
     const [wallet, setWallet] = useState("");
-    const [tickets, setTickets] = useState<any[]>([]);
+    const [tickets, setTickets] = useState<TicketType[]>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -32,14 +32,14 @@ export default function ProfilePage() {
                     }
 
                     const meta = await res.json();
-                    return { ...t, meta };
+                    return { tokenId: t.tokenId, tokenURI: t.tokenURI, meta } as TicketType;
                 } catch (err) {
                     console.warn(`Skipping tokenId ${t.tokenId} - error fetching metadata`, err);
                     return null;
                 }
             }));
 
-            setTickets(ticketData.filter(Boolean));
+            setTickets(ticketData.filter((t): t is TicketType => t !== null));
             setLoading(false);
         };
 
@@ -265,7 +265,7 @@ export default function ProfilePage() {
                         <div className="text-6xl mb-6">🎫</div>
                         <h3 className="text-2xl font-bold text-gray-700 mb-4">No Tickets Found</h3>
                         <p className="text-gray-600 max-w-md mx-auto">
-                            You don't have any tickets yet. Start exploring events and get your first NFT ticket!
+                            You do not have any tickets yet. Start exploring events and get your first NFT ticket!
                         </p>
                     </motion.div>
                 ) : (

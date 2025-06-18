@@ -1,11 +1,11 @@
 'use client';
-import { useSearchParams } from 'next/navigation';
+
 import { events } from '@/lib/event';
 import { useEffect, useState } from 'react';
+export const dynamic = 'force-dynamic';
 
 export default function MintPage() {
-  const searchParams = useSearchParams();
-  const eventId = searchParams.get('eventId');
+  const [isClient, setIsClient] = useState(false);
   const [formData, setFormData] = useState({
     eventName: '',
     eventDate: '',
@@ -17,6 +17,13 @@ export default function MintPage() {
   });
 
   useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isClient) return;
+    const searchParams = new URLSearchParams(window.location.search);
+    const eventId = searchParams.get('eventId');
     const selectedEvent = events.find((e) => e.id.toString() === eventId);
     if (selectedEvent) {
       setFormData({
@@ -29,7 +36,9 @@ export default function MintPage() {
         tokenURI: '',
       });
     }
-  }, [eventId]);
+  }, [isClient]);
+
+  if (!isClient) return null;
 
   return (
     <div className="p-6">

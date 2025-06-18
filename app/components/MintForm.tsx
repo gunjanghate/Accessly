@@ -136,6 +136,7 @@ export default function MintTicketForm() {
           imageURI = await uploadFileToPinata(formData.bannerImage);
           console.log("🖼 Image uploaded:", imageURI);
         } catch (error) {
+          console.log(error)
           throw new Error("Failed to upload image. Please try again.");
         } finally {
           setUploadingImage(false);
@@ -174,6 +175,7 @@ export default function MintTicketForm() {
 
           console.log("📦 Metadata uploaded to IPFS:", tokenURI);
         } catch (error) {
+          console.log(error);
           throw new Error("Failed to upload metadata. Please try again.");
         } finally {
           setUploadingMetadata(false);
@@ -196,21 +198,28 @@ export default function MintTicketForm() {
       setStep(3);
       console.log("✅ Minted! Tx:", receipt.hash);
 
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("❌ Mint failed:", err);
       setStep(1);
 
       // More specific error messages
-      if (err.code === 4001) {
-        setError("Transaction rejected by user.");
-      } else if (err.code === -32603) {
-        setError("Internal JSON-RPC error. Please try again.");
-      } else if (err.message?.includes("insufficient funds")) {
-        setError("Insufficient funds for transaction.");
-      } else if (err.message?.includes("user rejected")) {
-        setError("Transaction rejected by user.");
-      } else if (err.message) {
-        setError(`Minting failed: ${err.message}`);
+      if (typeof err === "object" && err !== null && "code" in err) {
+        const code = (err as { code: number }).code;
+        if (code === 4001) {
+          setError("Transaction rejected by user.");
+        } else if (code === -32603) {
+          setError("Internal JSON-RPC error. Please try again.");
+        } else if ("message" in err && typeof (err).message === "string" && (err).message.includes("insufficient funds")) {
+          setError("Insufficient funds for transaction.");
+        } else if ("message" in err && typeof (err).message === "string" && (err).message.includes("user rejected")) {
+          setError("Transaction rejected by user.");
+        } else if ("message" in err && typeof (err).message === "string") {
+          setError(`Minting failed: ${(err).message}`);
+        } else {
+          setError("Minting failed. Please try again.");
+        }
+      } else if (typeof err === "object" && err !== null && "message" in err && typeof (err).message === "string") {
+        setError(`Minting failed: ${(err).message}`);
       } else {
         setError("Minting failed. Please try again.");
       }

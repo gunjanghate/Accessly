@@ -1,9 +1,11 @@
 import { getTicketContract } from "./contract";
 import { ethers } from "ethers";
 
+type TokenByOwner = { tokenId: number; tokenURI: string };
+
 export async function getTokensByOwner(address: string, provider: ethers.Provider) {
   const contract = getTicketContract(provider);
-  const tokens: any[] = [];
+  const tokens: TokenByOwner[] = [];
   const nextId = await contract.nextTokenId();
 
   for (let i = 0; i < nextId; i++) {
@@ -17,11 +19,11 @@ export async function getTokensByOwner(address: string, provider: ethers.Provide
   return tokens;
 }
 
-
+type MintedTicket = { tokenId: number; owner: string; tokenURI: string };
 
 export async function getAllMintedTickets(provider: ethers.Provider) {
   const contract = getTicketContract(provider);
-  const tokens: any[] = [];
+  const tokens: MintedTicket[] = [];
   const nextId = await contract.nextTokenId();
 
   for (let i = 0; i < nextId; i++) {

@@ -1,77 +1,46 @@
 'use client';
 import { useEffect, useState } from "react";
-import { ethers } from "ethers";
 import { useRouter } from "next/navigation";
-import { getAllMintedTickets } from "@/lib/getTokensByOwner";
 import { motion, AnimatePresence } from "framer-motion";
 
-type Attribute = {
-  trait_type: string;
-  value: string;
-};
-
-type EventMetadata = {
-  name: string;
+type EventData = {
+  _id: string;
+  eventName: string;
+  date: string;
+  venue: string;
   description: string;
   image: string;
-  attributes: Attribute[];
-  tokenId: number;
-  owner: string;
+  price: string;
+  maxTickets: number;
+  mintedCount: number;
+  organizerWallet: string;
+  verifiedOrganizer: boolean;
+  isActive: boolean;
+  createdAt: string;
 };
 
 export default function EventsPage() {
-  const [events, setEvents] = useState<EventMetadata[]>([]);
+  const [events, setEvents] = useState<EventData[]>([]);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
-    const loadFromChain = async () => {
+    const loadEvents = async () => {
       try {
-        if (!window.ethereum) {
-          throw new Error("MetaMask is not installed. Please install MetaMask to continue.");
+        const response = await fetch('/api/events');
+        if (!response.ok) {
+          throw new Error('Failed to fetch events');
         }
-        const provider = new ethers.BrowserProvider(window.ethereum);
-        const tokens = await getAllMintedTickets(provider);
-
-        const eventData = await Promise.all(
-          tokens.map(async (token) => {
-            try {
-              const uri = token.tokenURI.replace("ipfs://", "https://ipfs.io/ipfs/");
-              const res = await fetch(uri);
-              const contentType = res.headers.get("content-type");
-
-              if (!contentType?.includes("application/json")) {
-                console.warn(`Skipping token ${token.tokenId} - not JSON`);
-                return null;
-              }
-
-              const meta = await res.json();
-
-              return {
-                name: meta.name,
-                description: meta.description,
-                image: meta.image?.replace("ipfs://", "https://ipfs.io/ipfs/"),
-                attributes: meta.attributes,
-                tokenId: token.tokenId,
-                owner: token.owner,
-              } as EventMetadata;
-            } catch (err) {
-              console.log(err)
-              console.warn(`Skipping token ${token.tokenId} due to metadata error`);
-              return null;
-            }
-          })
-        );
-
-        setEvents(eventData.filter((e): e is EventMetadata => e !== null));
+        const eventData = await response.json();
+        setEvents(eventData);
       } catch (err) {
-        console.error("Failed to load tickets from blockchain", err);
+        console.error("Failed to load events from API", err);
       } finally {
         setLoading(false);
       }
     };
 
-    loadFromChain();
+    loadEvents();
   }, []);
 
   // Loading skeleton component
@@ -94,13 +63,31 @@ export default function EventsPage() {
     </motion.div>
   );
 
-  const EventCard = ({ event, index }: { event: EventMetadata; index: number }) => {
+  const EventCard = ({ event, index }: { event: EventData; index: number }) => {
     const [imageLoaded, setImageLoaded] = useState(false);
     const [imageError, setImageError] = useState(false);
 
-    const getAttributeValue = (traitType: string) => {
-      return event.attributes.find((attr) => attr.trait_type === traitType)?.value;
+    // Format the image URL if it's IPFS
+    const imageUrl = event.image?.startsWith('ipfs://') 
+      ? event.image.replace('ipfs://', 'https://ipfs.io/ipfs/')
+      : event.image;
+
+    // Format date
+    const formatDate = (dateString: string) => {
+      try {
+        return new Date(dateString).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric'
+        });
+      } catch {
+        return dateString;
+      }
     };
+
+    // Calculate availability
+    const availableTickets = event.maxTickets - event.mintedCount;
+    const isFullyBooked = availableTickets <= 0;
 
     return (
       <motion.div
@@ -127,17 +114,37 @@ export default function EventsPage() {
           {/* Decorative top gradient */}
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
 
+          {/* Status badges */}
+          <div className="absolute top-4 right-4 z-10 flex flex-col gap-2">
+            {event.verifiedOrganizer && (
+              <motion.div
+                className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-2 py-1 rounded-full text-xs font-semibold shadow-lg flex items-center gap-1"
+                whileHover={{ scale: 1.05 }}
+              >
+                ✓ Verified
+              </motion.div>
+            )}
+            {isFullyBooked && (
+              <motion.div
+                className="bg-gradient-to-r from-red-500 to-rose-500 text-white px-2 py-1 rounded-full text-xs font-semibold shadow-lg"
+                whileHover={{ scale: 1.05 }}
+              >
+                Sold Out
+              </motion.div>
+            )}
+          </div>
+
           <div className="p-6">
             {/* Image container */}
             <div className="relative mb-6 overflow-hidden rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50">
-              {!imageError ? (
+              {!imageError && imageUrl ? (
                 <>
                   {!imageLoaded && (
                     <div className="absolute inset-0 bg-gradient-to-r from-indigo-200/50 to-purple-200/50 animate-pulse rounded-xl"></div>
                   )}
                   <motion.img
-                    src={event.image}
-                    alt={event.name}
+                    src={imageUrl}
+                    alt={event.eventName}
                     className={`w-full h-48 object-cover transition-all duration-500 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
                     onLoad={() => setImageLoaded(true)}
                     onError={() => setImageError(true)}
@@ -165,36 +172,51 @@ export default function EventsPage() {
                 className="text-xl font-bold text-gray-800 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-indigo-600 group-hover:to-purple-600 group-hover:bg-clip-text transition-all duration-300 line-clamp-2"
                 whileHover={{ x: 2 }}
               >
-                {event.name}
+                {event.eventName}
               </motion.h2>
 
               {/* Event Details */}
               <div className="space-y-2">
                 <div className="flex items-center gap-2 text-sm text-gray-600">
                   <span className="text-indigo-500">📅</span>
-                  <span>{getAttributeValue("Date") || "Date TBA"}</span>
+                  <span>{formatDate(event.date)}</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-gray-600">
                   <span className="text-purple-500">📍</span>
-                  <span>{getAttributeValue("Location") || "Location TBA"}</span>
+                  <span>{event.venue}</span>
                 </div>
               </div>
 
-              {/* Price Badge */}
-              <motion.div
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-green-100 to-emerald-100 text-green-700 px-4 py-2 rounded-full text-sm font-semibold shadow-sm"
-                whileHover={{
-                  scale: 1.05,
-                  boxShadow: "0 4px 12px rgba(34, 197, 94, 0.15)"
-                }}
-              >
+              {/* Price and Availability */}
+              <div className="flex items-center justify-between gap-4">
                 <motion.div
-                  className="w-2 h-2 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full"
-                  animate={{ scale: [1, 1.2, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                ></motion.div>
-                🎟️ {getAttributeValue("Price") || "Free"}
-              </motion.div>
+                  className="inline-flex items-center gap-2 bg-gradient-to-r from-green-100 to-emerald-100 text-green-700 px-4 py-2 rounded-full text-sm font-semibold shadow-sm"
+                  whileHover={{
+                    scale: 1.05,
+                    boxShadow: "0 4px 12px rgba(34, 197, 94, 0.15)"
+                  }}
+                >
+                  <motion.div
+                    className="w-2 h-2 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full"
+                    animate={{ scale: [1, 1.2, 1] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  ></motion.div>
+                  🎟️ {event.price} ETH
+                </motion.div>
+
+                <motion.div
+                  className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold shadow-sm ${
+                    isFullyBooked 
+                      ? 'bg-gradient-to-r from-red-100 to-rose-100 text-red-700'
+                      : availableTickets <= 5
+                      ? 'bg-gradient-to-r from-orange-100 to-amber-100 text-orange-700'
+                      : 'bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-700'
+                  }`}
+                  whileHover={{ scale: 1.05 }}
+                >
+                  {availableTickets}/{event.maxTickets} left
+                </motion.div>
+              </div>
 
               {/* Description */}
               {event.description && (
@@ -205,7 +227,7 @@ export default function EventsPage() {
 
               {/* Bottom section */}
               <div className="flex items-center justify-between pt-4 border-t border-gray-100/50">
-                {/* Token ID Badge */}
+                {/* Event ID Badge */}
                 <motion.div
                   className="inline-flex items-center gap-2 bg-gradient-to-r from-gray-100 to-gray-100 text-gray-700 px-3 py-1.5 rounded-full text-xs font-semibold shadow-sm"
                   whileHover={{
@@ -218,7 +240,7 @@ export default function EventsPage() {
                     animate={{ scale: [1, 1.2, 1] }}
                     transition={{ duration: 2, repeat: Infinity }}
                   ></motion.div>
-                  Token #{event.tokenId}
+                  Event ID: {event._id.slice(-6)}
                 </motion.div>
 
                 {/* Event icon */}
@@ -234,24 +256,37 @@ export default function EventsPage() {
                 </motion.div>
               </div>
 
-              {/* View Ticket Button */}
+              {/* View/Mint Ticket Button */}
               <motion.button
-                className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden group/btn"
-                onClick={() => router.push(`/mint?tokenId=${event.tokenId}`)}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                className={`w-full px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden group/btn ${
+                  isFullyBooked || !event.isActive
+                    ? 'bg-gradient-to-r from-gray-400 to-gray-500 text-white cursor-not-allowed'
+                    : 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white'
+                }`}
+                onClick={() => {
+                  if (!isFullyBooked && event.isActive) {
+                    router.push(`/mint?eventId=${event._id}`);
+                  }
+                }}
+                whileHover={!isFullyBooked && event.isActive ? { scale: 1.02 } : {}}
+                whileTap={!isFullyBooked && event.isActive ? { scale: 0.98 } : {}}
+                disabled={isFullyBooked || !event.isActive}
               >
                 {/* Button background animation */}
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                {!isFullyBooked && event.isActive && (
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                )}
                 
                 <span className="relative z-10 flex items-center justify-center gap-2">
-                  View Ticket
-                  <motion.span
-                    animate={{ x: [0, 4, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                  >
-                    →
-                  </motion.span>
+                  {isFullyBooked ? 'Sold Out' : !event.isActive ? 'Event Inactive' : 'Mint Ticket'}
+                  {!isFullyBooked && event.isActive && (
+                    <motion.span
+                      animate={{ x: [0, 4, 0] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                    >
+                      →
+                    </motion.span>
+                  )}
                 </span>
               </motion.button>
             </div>
@@ -281,11 +316,11 @@ export default function EventsPage() {
             🎫
           </motion.div>
           <h1 className="text-4xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-            All Minted Events
+            All Available Events
           </h1>
         </div>
         <p className="text-gray-600 text-lg">
-          Discover amazing events and mint your tickets
+          Discover amazing events and mint your tickets on the blockchain
         </p>
       </motion.div>
 
@@ -322,7 +357,7 @@ export default function EventsPage() {
             </motion.div>
             <h3 className="text-3xl font-bold text-gray-700 mb-4">No Events Found</h3>
             <p className="text-gray-600 max-w-md mx-auto text-lg">
-              No events have been minted yet. Be the first to create an amazing event!
+              No events are currently available. Check back soon for exciting new events!
             </p>
           </motion.div>
         ) : (
@@ -334,7 +369,7 @@ export default function EventsPage() {
           >
             {events.map((event, index) => (
               <EventCard
-                key={event.tokenId}
+                key={event._id}
                 event={event}
                 index={index}
               />

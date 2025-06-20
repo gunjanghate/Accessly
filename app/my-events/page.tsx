@@ -46,7 +46,6 @@ export default function ProfilePage() {
         load();
     }, []);
 
-    // Loading skeleton component
     const TicketSkeleton = () => (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -236,7 +235,7 @@ export default function ProfilePage() {
                 <div className="flex items-center gap-3 mb-4">
               
                     <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-purple-600 bg-clip-text text-transparent">
-                        Your Tickets ({wallet ? wallet.slice(0, 6) + '...' : 'Loading...'})
+                        Your Events ({wallet ? wallet.slice(0, 6) + '...' : 'Loading...'})
                     </h1>
                 </div>
             </motion.div>
@@ -263,9 +262,9 @@ export default function ProfilePage() {
                         className="text-center py-16"
                     >
                         <div className="text-6xl mb-6">🎫</div>
-                        <h3 className="text-2xl font-bold text-gray-700 mb-4">No Tickets Found</h3>
+                        <h3 className="text-2xl font-bold text-gray-700 mb-4">No Events Found</h3>
                         <p className="text-gray-600 max-w-md mx-auto">
-                            You do not have any tickets yet. Start exploring events and get your first NFT ticket!
+                            You have not listed any events yet. Start by listing your first event!
                         </p>
                     </motion.div>
                 ) : (

@@ -94,6 +94,8 @@ Create a `.env.local` file and configure:
 NEXT_PUBLIC_PROJECT_ID=<walletconnect_or_infura_id>
 NEXT_PUBLIC_CONTRACT_ADDRESS=<deployed_ticket_contract_address>
 NEXT_PUBLIC_IPFS_GATEWAY=https://your-ipfs-gateway
+MONGODB_URI=your-mongodb-uri
+NEXT_PUBLIC_ADMIN_WALLETS="admin wallet addresses"
 ```
 
 ### 4. Run the Dev Server

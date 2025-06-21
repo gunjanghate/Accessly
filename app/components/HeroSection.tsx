@@ -2,13 +2,13 @@
 import * as React from 'react';
 
 import { motion, easeInOut, easeOut } from 'framer-motion';
-import { 
-  Shield, 
-  Zap, 
-  Globe, 
-  QrCode, 
-  ArrowRight, 
-  CheckCircle, 
+import {
+  Shield,
+  Zap,
+  Globe,
+  QrCode,
+  ArrowRight,
+  CheckCircle,
 
   Sparkles
 } from 'lucide-react';
@@ -19,7 +19,7 @@ const heroFont = Edu_AU_VIC_WA_NT_Guides({
   subsets: ["latin"],
 });
 const HeroSection = () => {
-    const router = useRouter();
+  const router = useRouter();
   const [isVisible, setIsVisible] = React.useState(false);
 
   React.useEffect(() => {
@@ -114,31 +114,31 @@ const HeroSection = () => {
           </motion.div>
 
           {/* Main Heading */}
-          <motion.h1 
+          <motion.h1
             variants={itemVariants}
             className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight flex flex-col"
           >
-            <span  className={` ${heroFont.variable} bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text font-semibold italic text-transparent text-6xl py-2`}>
+            <span className={` ${heroFont.variable} bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text font-semibold italic text-transparent text-6xl py-2`}>
               Accessly
             </span>
-           
+
             <span className="text-gray-900 font-bold text-4xl md:text-5xl lg:text-6xl">
               Decentralized Ticketing
             </span>
           </motion.h1>
 
           {/* Subtitle */}
-          <motion.p 
+          <motion.p
             variants={itemVariants}
             className="text-lg md:text-xl text-gray-600 mb-8 max-w-4xl mx-auto leading-relaxed"
           >
-            The first Web3-native event platform that eliminates fake tickets through 
-            <span className="font-semibold text-indigo-600"> NFT technology</span>, 
+            The first Web3-native event platform that eliminates fake tickets through
+            <span className="font-semibold text-indigo-600"> NFT technology</span>,
             crypto payments, and instant QR verification.
           </motion.p>
 
           {/* Feature Pills */}
-          <motion.div 
+          <motion.div
             variants={itemVariants}
             className="flex flex-wrap justify-center gap-4 mb-12"
           >
@@ -155,35 +155,38 @@ const HeroSection = () => {
           </motion.div>
 
           {/* CTA Buttons */}
-          <motion.div 
+          <motion.div
             variants={itemVariants}
             className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
           >
             <motion.button
               whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(99, 102, 241, 0.4)" }}
               whileTap={{ scale: 0.95 }}
-              className="group px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-full text-lg shadow-xl hover:shadow-2xl transition-all duration-300"
+              className="group px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-full text-lg shadow-xl hover:shadow-2xl transition-all duration-300 cursor-pointer"
             >
               <span className="flex items-center justify-center space-x-2">
                 <span
-                                onClick={()=>{
-                    router.push("/create-ticket")
-                }}>Create Event</span>
+                  onClick={() => {
+                    router.push("/create-event")
+                  }}>Create Event</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </span>
             </motion.button>
-            
+
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-white/80 backdrop-blur-sm border-2 border-gray-200 text-gray-700 font-semibold rounded-full text-lg hover:bg-white hover:border-indigo-300 transition-all duration-300 shadow-lg"
+              onClick={() => {
+                router.push("/events")
+              }}
+              className="px-8 py-4 bg-white/80 backdrop-blur-sm border-2 border-gray-200 text-gray-700 font-semibold rounded-full text-lg hover:bg-white hover:border-indigo-300 transition-all duration-300 shadow-lg cursor-pointer"
             >
               Browse Events
             </motion.button>
           </motion.div>
 
           {/* Stats */}
-          <motion.div 
+          <motion.div
             variants={itemVariants}
             className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16"
           >
@@ -202,7 +205,7 @@ const HeroSection = () => {
           </motion.div>
 
           {/* Problem Statement */}
-          <motion.div 
+          <motion.div
             variants={itemVariants}
             className="max-w-4xl mx-auto"
           >
@@ -212,11 +215,11 @@ const HeroSection = () => {
                   <Shield className="w-8 h-8 text-red-600" />
                 </div>
               </div>
-              
+
               <h3 className="text-2xl font-bold text-gray-900 mb-4">
                 Why Web2 Ticketing is Broken
               </h3>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
                 <div className="space-y-3">
                   <div className="flex items-start space-x-3">
@@ -240,7 +243,7 @@ const HeroSection = () => {
                 </div>
               </div>
 
-              <motion.div 
+              <motion.div
                 className="mt-8 p-6 bg-gradient-to-r from-green-50 to-blue-50 rounded-2xl border border-green-200"
                 whileHover={{ scale: 1.02 }}
               >
@@ -249,8 +252,8 @@ const HeroSection = () => {
                   <h4 className="text-lg font-semibold text-gray-900">Accessly Solution</h4>
                 </div>
                 <p className="text-gray-700 leading-relaxed">
-                  By minting tickets as NFTs and leveraging blockchain technology, we ensure 
-                  authenticity, enable seamless transfers, and provide complete transparency 
+                  By minting tickets as NFTs and leveraging blockchain technology, we ensure
+                  authenticity, enable seamless transfers, and provide complete transparency
                   in the event ecosystem.
                 </p>
               </motion.div>
@@ -261,27 +264,27 @@ const HeroSection = () => {
 
       {/* Floating Elements */}
       <motion.div
-        animate={{ 
+        animate={{
           rotate: [0, 360],
           scale: [1, 1.1, 1]
         }}
-        transition={{ 
-          duration: 20, 
-          repeat: Infinity, 
-          ease: "linear" 
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          ease: "linear"
         }}
         className="absolute top-1/4 right-10 w-16 h-16 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full opacity-20 blur-sm"
       />
-      
+
       <motion.div
-        animate={{ 
+        animate={{
           rotate: [360, 0],
           scale: [1, 1.2, 1]
         }}
-        transition={{ 
-          duration: 15, 
-          repeat: Infinity, 
-          ease: "linear" 
+        transition={{
+          duration: 15,
+          repeat: Infinity,
+          ease: "linear"
         }}
         className="absolute bottom-1/4 left-10 w-12 h-12 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full opacity-20 blur-sm"
       />

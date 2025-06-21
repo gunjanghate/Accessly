@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-// import MintFormTicket from '../components/MintFormTicket';
+import MintFormTicket from '../components/MintFormTicket';
 import { FormData } from '@/types';
 
 type EventData = {
@@ -23,6 +23,7 @@ type EventData = {
 
 export default function MintPage() {
   const [formData, setFormData] = useState<FormData>({
+    eventId: '',
     eventName: '',
     eventDate: '',
     venue: '',
@@ -71,6 +72,7 @@ export default function MintPage() {
 
         // Populate form data with event information
         setFormData({
+          eventId: event._id,
           eventName: event.eventName,
           eventDate: event.date,
           venue: event.venue,
@@ -88,10 +90,20 @@ export default function MintPage() {
       }
     };
 
+
     loadEventData();
   }, []);
+  const [availableTickets, setAvailableTickets] = useState(0);
 
-  // Loading component
+  useEffect(() => {
+    if (eventData) {
+      setAvailableTickets(eventData.maxTickets - eventData.mintedCount);
+    }
+  }, [eventData]);
+  const isFullyBooked = availableTickets <= 0;
+  const isEventActive = eventData?.isActive;
+
+
   const LoadingScreen = () => (
     <motion.div
       initial={{ opacity: 0 }}
@@ -180,9 +192,7 @@ export default function MintPage() {
   if (notFound) return <ErrorScreen message="Event not found. Please check the event ID and try again." icon="🔍" />;
   if (error) return <ErrorScreen message={error} icon="⚠️" />;
 
-  const availableTickets = eventData ? eventData.maxTickets - eventData.mintedCount : 0;
-  const isFullyBooked = availableTickets <= 0;
-  const isEventActive = eventData?.isActive;
+
 
   return (
     <AnimatePresence>
@@ -416,15 +426,15 @@ export default function MintPage() {
                     <p className="text-red-600">All tickets for this event have been minted.</p>
                   </motion.div>
                 ) : (
-                  // <MintFormTicket formData={formData} setFormData={setFormData} eventData={eventData} />
-                  <div>Mint Form</div>
+                  <MintFormTicket formData={formData} setFormData={setFormData}  />
+                  // <div>Mint Form</div>
                 )}
               </div>
             </motion.div>
           </div>
 
           {/* Debug Info (Development Only) */}
-          {process.env.NODE_ENV === 'development' && (
+          {/* {process.env.NODE_ENV === 'development' && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -450,7 +460,7 @@ export default function MintPage() {
                 </details>
               )}
             </motion.div>
-          )}
+          )} */}
         </div>
       </motion.div>
     </AnimatePresence>

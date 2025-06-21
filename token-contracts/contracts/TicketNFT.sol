@@ -29,7 +29,7 @@ contract TicketNFT is ERC721URIStorage, Ownable {
         string memory _seat,
         uint256 _price,
         string memory _tokenURI
-    ) external onlyOwner returns (uint256) {
+    ) external returns (uint256) {
         uint256 tokenId = nextTokenId;
         _safeMint(to, tokenId);
         _setTokenURI(tokenId, _tokenURI);

@@ -51,7 +51,7 @@ const Header = () => {
             <Link href="/my-tickets" className="text-gray-800 hover:text-indigo-600 font-medium hover:underline hover:decoration-violet-500 text-lg transition-all duration-500">
               My Tickets
             </Link>
-            <Link href={"/create-ticket"} className="text-gray-800 hover:text-indigo-600 font-medium hover:underline hover:decoration-violet-500 text-lg transition-all duration-500">
+            <Link href={"/create-event"} className="text-gray-800 hover:text-indigo-600 font-medium hover:underline hover:decoration-violet-500 text-lg transition-all duration-500">
               Create Event
             </Link>
           </motion.nav>

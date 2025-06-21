@@ -1,6 +1,6 @@
 "use client"
 import * as React from 'react';
-import { Ticket, Shield, Zap, Github, Twitter, MessageCircle, Globe, QrCode } from 'lucide-react';
+import { Ticket, Shield, Zap, Github, Twitter,Mail, Globe, QrCode } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 const Footer = () => {
     const router = useRouter();
@@ -13,7 +13,7 @@ const Footer = () => {
         <div className="absolute top-1/2 left-1/3 w-24 h-24 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full blur-2xl"></div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-16">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 pt-10 pb-8">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           
@@ -38,14 +38,14 @@ const Footer = () => {
               The first Web3-native event platform that eliminates fake tickets through NFT technology, crypto payments, and instant QR verification.
             </p>
             <div className="flex space-x-3">
-              <a href="#" className="p-3 bg-white hover:bg-purple-50 rounded-xl border border-gray-200 hover:border-purple-300 transition-all duration-200 shadow-sm hover:shadow-md">
+              <a href="https://x.com/gunjanghate11" className="p-3 bg-white hover:bg-purple-50 rounded-xl border border-gray-200 hover:border-purple-300 transition-all duration-200 shadow-sm hover:shadow-md">
                 <Twitter className="w-5 h-5 text-gray-600 hover:text-purple-600" />
               </a>
-              <a href="#" className="p-3 bg-white hover:bg-purple-50 rounded-xl border border-gray-200 hover:border-purple-300 transition-all duration-200 shadow-sm hover:shadow-md">
+              <a href="https://github.com/gunjanghate/Accessly" className="p-3 bg-white hover:bg-purple-50 rounded-xl border border-gray-200 hover:border-purple-300 transition-all duration-200 shadow-sm hover:shadow-md">
                 <Github className="w-5 h-5 text-gray-600 hover:text-purple-600" />
               </a>
-              <a href="#" className="p-3 bg-white hover:bg-purple-50 rounded-xl border border-gray-200 hover:border-purple-300 transition-all duration-200 shadow-sm hover:shadow-md">
-                <MessageCircle className="w-5 h-5 text-gray-600 hover:text-purple-600" />
+              <a href="mailto:ghategunjan@gmail.com" className="p-3 bg-white hover:bg-purple-50 rounded-xl border border-gray-200 hover:border-purple-300 transition-all duration-200 shadow-sm hover:shadow-md">
+                <Mail className="w-5 h-5 text-gray-600 hover:text-purple-600" />
               </a>
             </div>
           </div>
@@ -54,17 +54,14 @@ const Footer = () => {
           <div className="space-y-6">
             <h4 className="text-xl font-semibold text-gray-800">Platform</h4>
             <ul className="space-y-3 text-gray-600">
-              <li><a href="#" className="hover:text-purple-600 transition-colors duration-200 flex items-center space-x-2 group">
+              <li><a href="/events" className="hover:text-purple-600 transition-colors duration-200 flex items-center space-x-2 group">
                 <span className="group-hover:translate-x-1 transition-transform duration-200">Browse Events</span>
               </a></li>
-              <li><a href="#" className="hover:text-purple-600 transition-colors duration-200 flex items-center space-x-2 group">
+              <li><a href="/create-event" className="hover:text-purple-600 transition-colors duration-200 flex items-center space-x-2 group">
                 <span className="group-hover:translate-x-1 transition-transform duration-200">Create Event</span>
               </a></li>
-              <li><a href="#" className="hover:text-purple-600 transition-colors duration-200 flex items-center space-x-2 group">
+              <li><a href="/my-tickets" className="hover:text-purple-600 transition-colors duration-200 flex items-center space-x-2 group">
                 <span className="group-hover:translate-x-1 transition-transform duration-200">My Tickets</span>
-              </a></li>
-              <li><a href="#" className="hover:text-purple-600 transition-colors duration-200 flex items-center space-x-2 group">
-                <span className="group-hover:translate-x-1 transition-transform duration-200">Resale Market</span>
               </a></li>
             </ul>
           </div>
@@ -120,7 +117,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Web3 Stats Banner */}
+        {/* Web3 Stats Banner
         <div className="border-t border-gray-200 pt-12 mb-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             <div className="p-6 bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200">
@@ -140,7 +137,7 @@ const Footer = () => {
               <div className="text-sm text-gray-500 font-medium mt-1">Active Users</div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Bottom Bar */}
         <div className="border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
@@ -151,10 +148,10 @@ const Footer = () => {
         </div>
 
         {/* Blockchain Network Status */}
-        <div className="mt-8 text-center">
-          <div className="inline-flex items-center space-x-3 px-6 py-3 bg-white border border-green-200 rounded-full shadow-sm">
+        <div className="mt-4 text-center">
+          <div className="inline-flex items-center space-x-3 px-3 py-2 bg-white border border-green-200 rounded-full shadow-sm">
             <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-            <span className="text-green-600 text-sm font-semibold">Filecoin testnet Connected</span>
+            <span className="text-green-600 text-sm font-semibold">Deployed on Filecoin testnet</span>
           </div>
         </div>
       </div>

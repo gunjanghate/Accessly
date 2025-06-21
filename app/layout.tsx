@@ -3,6 +3,7 @@ import { Montserrat } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import { Web3Provider } from "@/context/Web3Context";
 const geistSans = Montserrat({
   variable: "--font-monsterrat",
   subsets: ["latin"],
@@ -29,9 +30,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased  bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100`}
       >
-        <Header/>
-        {children}
-        <Footer/>
+        <Web3Provider>
+          <Header />
+          {children}
+          <Footer />
+        </Web3Provider>
       </body>
     </html>
   );

@@ -1,4 +1,5 @@
 export type FormData = {
+  eventId: string;
   eventName: string;
   eventDate: string;
   venue: string;

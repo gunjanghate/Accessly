@@ -1,13 +1,13 @@
 const hre = require("hardhat");
 
 async function main() {
-    const [deployer] = await hre.ethers.getSigners(); // get deployer address
+    const [deployer] = await hre.ethers.getSigners(); 
   const TicketNFT = await hre.ethers.getContractFactory("TicketNFT");
   const contract = await TicketNFT.deploy(deployer.address);
 
-  await contract.waitForDeployment(); // This is the missing piece
+  await contract.waitForDeployment();
 
-  const address = await contract.getAddress(); // Correct way to fetch address in ethers v6
+  const address = await contract.getAddress(); 
 
   console.log(`✅ TicketNFT deployed to: ${address}`);
 }

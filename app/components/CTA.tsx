@@ -28,7 +28,6 @@ const CTA = () => {
           <span className="bg-gradient-to-br pb-3 bg-clip-text text-transparent from-neutral-500 to-neutral-950">Your Events?</span>
         </h2>
 
-        {/* Subheading */}
         <p className="text-xl md:text-xl text-slate-600 mb-6 max-w-3xl mx-auto leading-relaxed">
           Join thousands of event creators who trust Accessly for secure, 
           decentralized ticketing powered by blockchain technology.

@@ -4,11 +4,11 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Wallet, ChevronDown, Copy, ExternalLink, LogOut, Check } from 'lucide-react';
 import { useWeb3 } from '@/context/Web3Context';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 
 export default function WalletButton() {
   const { address, isConnected, connectWallet, disconnectWallet } = useWeb3();
-  const router = useRouter();
+  // const router = useRouter();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -37,9 +37,9 @@ export default function WalletButton() {
         className="relative px-6 py-2.5 border-2 hover:border-purple-700 border-t-indigo-600 border-purple-600 border-b-purple-600 transition-all duration-200 hover:bg-gradient-to-r from-indigo-600 to-purple-600 hover:text-white font-semibold rounded-full hover:from-indigo-700 hover:to-purple-700 shadow-lg hover:shadow-xl"
         whileTap={{ scale: 0.95 }}
       >
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center gap-1 md:space-x-2 md:gap-0">
           <Wallet className="w-4 h-4" />
-          <span>Connect Wallet</span>
+          <span className='text-sm md:text-lg'>Connect Wallet</span>
         </div>
       </motion.button>
     );
@@ -92,12 +92,12 @@ export default function WalletButton() {
                 Account
               </div>
 
-              <button
+              {/* <button
                 onClick={() => router.push("/my-events")}
                 className="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-gray-50 rounded-lg transition-colors duration-150"
               >
                 Your Events
-              </button>
+              </button> */}
 
               <button
                 onClick={copyAddress}
@@ -112,7 +112,7 @@ export default function WalletButton() {
                   <p className="text-sm font-medium text-gray-900">
                     {copied ? 'Copied!' : 'Copy Address'}
                   </p>
-                  <p className="text-xs text-gray-500 font-mono">{address}</p>
+                  <p className="text-xs text-gray-500 font-mono"> {address.slice(0, 6)}...{address.slice(-4)}</p>
                 </div>
               </button>
 

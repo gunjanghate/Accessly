@@ -212,7 +212,7 @@ export default function MintPage() {
           className="bg-white/80 backdrop-blur-xl border-b border-white/30 sticky top-0 z-10"
         >
           <div className="max-w-7xl mx-auto px-6 py-6">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between flex-col gap-4 md:gap-1 md:flex-row">
               <div className="flex items-center gap-4">
                 <motion.button
                   className="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors duration-300"

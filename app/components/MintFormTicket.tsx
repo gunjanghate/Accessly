@@ -129,7 +129,7 @@ const MintFormTicket: React.FC<MintFormTicketProps> = ({ formData, setFormData }
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6">
+    <div className="max-w-2xl mx-auto md:p-6">
       <div className="bg-white rounded-2xl shadow-xl border-2 border-t-indigo-600 border-purple-600 border-b-purple-600 overflow-hidden">
         {/* Header */}
         <div className=" p-6">

@@ -64,11 +64,11 @@ Accessly ensures:
 | 4️⃣ | Ticket Minting + IPFS | Upload metadata to IPFS & mint NFTs |
 | 5️⃣ | Ticket Purchase Flow | Buy tickets using wallet, handle transactions |
 | 6️⃣ | QR Code Verification | Scan and verify ticket ownership live |
-| 7️⃣ | Ticket Resale & Transfer | Enable secondary ticketing & transfer |
+| 7️⃣ | Ticket Transfer | Enable secondary ticketing & transfer |
 | 8️⃣ | User Dashboard | View past/future/resold tickets |
 | 9️⃣ | Admin Panel | Organizer dashboard to create/manage events |
 | 🔟 | UI/UX Polish | Responsive design, animation, skeletons |
-| 1️⃣1️⃣ | Testing & Deployment | Hardhat tests, Playwright/Jest, Lighthouse |
+| 1️⃣1️⃣ | Testing & Deployment | Hardhat (contract) , Vercel (app) |
 
 ---
 
@@ -109,7 +109,7 @@ npm run dev
 ## 🔐 Smart Contracts
 
 * **TicketNFT.sol** – ERC721 contract to mint event tickets as NFTs
-* Deployed to: Sepolia Testnet (for now)
+* Deployed to: Filecoin Testnet (for now)
 * Interacts with the frontend using **Ethers v6**
 
 > Contract includes: `eventName`, `date`, `location`, `seat`, and `price` stored as metadata and mapped to tokenId.
@@ -131,11 +131,6 @@ Pull requests are welcome! If you want to contribute to a module, please fork th
 
 ---
 
-## 📄 License
-
-[MIT](LICENSE)
-
----
 
 ## 🙌 Acknowledgments
 

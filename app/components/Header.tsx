@@ -26,12 +26,12 @@ const Header = () => {
             <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-xl">
               <Ticket className="w-6 h-6 text-white" />
             </div>
-            <div>
+            <div className=''>
               <h1
                 onClick={() => {
                   router.push("/")
                 }}
-                className="text-xl font-semibold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent italic cursor-pointer">
+                className="text-2xl font-semibold font-serif bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent italic cursor-pointer">
                 Accessly
               </h1>
               <p className="text-xs text-gray-500">NFT Ticketing</p>

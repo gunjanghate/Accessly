@@ -20,12 +20,12 @@ const CTA = () => {
 
         {/* Main Heading */}
         <h2 className="text-5xl md:text-6xl lg:text-6xl font-bold mb-3 leading-tight">
-          <span className="text-slate-900">Ready to </span>
-          <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-br pb-3 bg-clip-text text-transparent from-neutral-500 to-neutral-950 ">Ready to </span>
+          <span className="bg-gradient-to-r from-indigo-600  to-purple-600 bg-clip-text text-transparent">
             Transform
           </span>
           <br />
-          <span className="text-slate-900">Your Events?</span>
+          <span className="bg-gradient-to-br pb-3 bg-clip-text text-transparent from-neutral-500 to-neutral-950">Your Events?</span>
         </h2>
 
         {/* Subheading */}

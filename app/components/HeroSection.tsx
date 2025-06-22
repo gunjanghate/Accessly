@@ -118,11 +118,11 @@ const HeroSection = () => {
             variants={itemVariants}
             className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight flex flex-col"
           >
-            <span className={` ${heroFont.variable} bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text font-semibold italic text-transparent text-6xl py-2`}>
+            <span className={`font-serif ${heroFont.variable} bg-gradient-to-br from-indigo-600  to-purple-600 bg-clip-text font-semibold italic text-transparent text-6xl py-2`}>
               Accessly
             </span>
 
-            <span className="text-gray-900 font-bold text-4xl md:text-5xl lg:text-6xl">
+            <span className="bg-gradient-to-br pb-3 bg-clip-text text-transparent from-neutral-500 to-neutral-950 font-bold text-4xl md:text-5xl lg:text-6xl">
               Decentralized Ticketing
             </span>
           </motion.h1>
@@ -133,7 +133,7 @@ const HeroSection = () => {
             className="text-lg md:text-xl text-gray-600 mb-8 max-w-4xl mx-auto leading-relaxed"
           >
             The first Web3-native event platform that eliminates fake tickets through
-            <span className="font-semibold text-indigo-600"> NFT technology</span>,
+            <span className="font-semibold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent "> NFT technology</span>,
             crypto payments, and instant QR verification.
           </motion.p>
 
@@ -162,7 +162,7 @@ const HeroSection = () => {
             <motion.button
               whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(99, 102, 241, 0.4)" }}
               whileTap={{ scale: 0.95 }}
-              className="group px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-full text-lg shadow-xl hover:shadow-2xl transition-all duration-300 cursor-pointer"
+              className="group px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-full text-xl shadow-xl hover:shadow-2xl transition-all duration-300 cursor-pointer"
             >
               <span className="flex items-center justify-center space-x-2">
                 <span
@@ -179,7 +179,7 @@ const HeroSection = () => {
               onClick={() => {
                 router.push("/events")
               }}
-              className="px-8 py-4 bg-white/80 backdrop-blur-sm border-2 border-gray-200 text-gray-700 font-semibold rounded-full text-lg hover:bg-white hover:border-indigo-300 transition-all duration-300 shadow-lg cursor-pointer"
+              className="px-6 py-3 bg-white/80 backdrop-blur-sm border-2 border-t-indigo-600 border-purple-600 border-b-purple-600 text-gray-700 font-semibold rounded-full text-xl hover:bg-white transition-all duration-300 shadow-lg cursor-pointer"
             >
               Browse Events
             </motion.button>

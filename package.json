@@ -6,8 +6,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "next start"
   },
   "dependencies": {
     "@rainbow-me/rainbowkit": "^2.2.7",
@@ -23,22 +22,22 @@
     "lucide-react": "^0.515.0",
     "mongoose": "^8.16.0",
     "next": "15.3.3",
+    "qrcode.react": "^4.2.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-qr-code": "^2.0.16",
     "viem": "^2.31.2",
     "wagmi": "^2.15.6",
     "zod": "^3.25.64"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
+  
     "@metamask/providers": "^22.1.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19",
     "autoprefixer": "^10.4.21",
-    "eslint": "^9",
-    "eslint-config-next": "15.3.3",
     "hardhat": "^2.24.3",
     "postcss": "^8.5.5",
     "tailwindcss": "^4.1.10",

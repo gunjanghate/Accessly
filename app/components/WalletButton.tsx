@@ -34,8 +34,7 @@ export default function WalletButton() {
     return (
       <motion.button
         onClick={connectWallet}
-        className="relative px-6 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-full hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl"
-        whileHover={{ scale: 1.05 }}
+        className="relative px-6 py-2.5 border-2 hover:border-purple-700 border-t-indigo-600 border-purple-600 border-b-purple-600 transition-all duration-200 hover:bg-gradient-to-r from-indigo-600 to-purple-600 hover:text-white font-semibold rounded-full hover:from-indigo-700 hover:to-purple-700 shadow-lg hover:shadow-xl"
         whileTap={{ scale: 0.95 }}
       >
         <div className="flex items-center space-x-2">

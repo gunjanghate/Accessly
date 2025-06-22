@@ -20,11 +20,11 @@ const Footer = () => {
           {/* Brand Section */}
           <div className="space-y-6">
             <div className="flex items-center space-x-3">
-              <div className="p-2 bg-gradient-to-br from-indigo-600 to-purple-600 shadow-lg rounded-xl">
+              <div className="p-2 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-xl">
                 <Ticket className="w-7 h-7 text-white" />
               </div>
               <div>
-                <h3 className="text-3xl font-semibold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent italic cursor-pointer"
+                <h3 className="text-3xl font-semibold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent italic cursor-pointer font-serif"
                 onClick={()=>{
                     router.push("/")
                 }}>

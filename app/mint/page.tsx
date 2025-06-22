@@ -199,8 +199,12 @@ export default function MintPage() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50"
+        className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 relative"
       >
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-300/5 via-blue-600/10 to-blue-600/5"></div>
+      <div className="absolute top-10 left-10 w-32 h-32 bg-gradient-to-br from-pink-400/20 to-pink-500/20 rounded-full blur-2xl"></div>
+      <div className="absolute bottom-10 right-10 w-40 h-40 bg-gradient-to-br from-purple-400/20 to-purple-500/20 rounded-full blur-2xl"></div>
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-blue-300/10 to-blue-400/10 rounded-full blur-3xl"></div>
         {/* Header Section */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -289,7 +293,7 @@ export default function MintPage() {
               transition={{ delay: 0.2 }}
               className="lg:col-span-1"
             >
-              <div className="bg-white/90 backdrop-blur-xl rounded-2xl p-6 shadow-2xl border border-white/30 sticky top-32">
+              <div className="bg-white/90 backdrop-blur-xl rounded-2xl p-6 shadow-2xl sticky top-32 border-2  hover:border-purple-700 border-t-indigo-600 border-purple-600 border-b-purple-600">
                 {/* Event Image */}
                 <div className="relative mb-6 overflow-hidden rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50">
                   {formData.bannerImage ? (
@@ -311,7 +315,7 @@ export default function MintPage() {
                 </div>
 
                 {/* Event Details */}
-                <div className="space-y-4">
+                <div className="space-y-4 ">
                   <div>
                     <h2 className="text-xl font-bold text-gray-800 mb-2">
                       {formData.eventName}

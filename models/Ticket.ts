@@ -11,7 +11,7 @@ const TicketSchema = new mongoose.Schema({
   txHash: { type: String, required: true },
 
   ownerWallet: { type: String, required: true },
-
+  isClaimed: { type: Boolean, default: false }, 
   mintedAt: {
     type: Date,
     default: Date.now,

@@ -33,8 +33,8 @@ Accessly ensures:
 | Framework  | [Next.js 15 (App Router)](https://nextjs.org) |
 | Styling    | Tailwind CSS, Framer Motion              |
 | Wallets    | Ethers.js            |
-| Storage    | IPFS/Filecoin (via NFT.storage)          |
-| Blockchain | Solidity (Hardhat), Sepolia testnet      |
+| Storage    | IPFS/Filecoin (via Pinata)          |
+| Blockchain | Solidity (Hardhat), Filecoin testnet      |
 | UI Tools   | Shadcn UI, Lucide Icons                  |
 | Hosting    | Vercel                                   |
 

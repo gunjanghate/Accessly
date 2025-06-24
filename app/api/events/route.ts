@@ -2,10 +2,19 @@ import { NextRequest, NextResponse } from "next/server";
 import { connectToDB } from "@/lib/mongo";
 import Event from "@/models/Event";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
     await connectToDB();
-    const events = await Event.find({ isActive: true }).sort({ createdAt: -1 });
+
+    const { searchParams } = new URL(req.url);
+    const organizer = searchParams.get("organizer");
+
+    const query: Record<string, any> = { isActive: true };
+    if (organizer) {
+      query.organizerWallet = organizer.toLowerCase(); // normalize wallet casing
+    }
+
+    const events = await Event.find(query).sort({ createdAt: -1 });
     return NextResponse.json(events);
   } catch (error) {
     console.error("GET /api/events error:", error);
@@ -40,7 +49,7 @@ export async function POST(req: NextRequest) {
       price: data.price,
       maxTickets: data.maxTickets || 50,
       mintedCount: 0,
-      organizerWallet: data.organizerWallet,
+      organizerWallet: data.organizerWallet.toLowerCase(), 
       verifiedOrganizer: true,
       isActive: true,
     });

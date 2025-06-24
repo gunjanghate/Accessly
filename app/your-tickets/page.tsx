@@ -25,7 +25,7 @@ type Metadata = {
   attributes: { trait_type: string; value: string }[];
 };
 
-const MyTicketPage = () => {
+const YourTicketPage = () => {
   const { address, isConnected } = useWeb3();
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const [metadataMap, setMetadataMap] = useState<Record<number, Metadata>>({});
@@ -161,7 +161,7 @@ const MyTicketPage = () => {
                   </motion.span>
                   <span className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent ml-2">
 
-                    My Tickets
+                    Your Tickets
                   </span>
                 </h1>
                 <p className="text-gray-600 mt-1 max-w-xl text-base">
@@ -344,7 +344,7 @@ const MyTicketPage = () => {
                                 </p>
                                 <div className="bg-white p-3 rounded-lg inline-block shadow-sm">
                                   <QRCodeCanvas
-                                    value={`https://accessly.vercel.app/verify?tokenId=${ticket.tokenId}&owner=${ticket.ownerWallet}`}
+                                    value={`https://accessly-self.vercel.app/verify?tokenId=${ticket.tokenId}&owner=${ticket.ownerWallet}`}
                                     size={140}
                                     bgColor="#ffffff"
                                     fgColor="#000000"
@@ -443,4 +443,4 @@ const MyTicketPage = () => {
   );
 };
 
-export default MyTicketPage;
+export default YourTicketPage;

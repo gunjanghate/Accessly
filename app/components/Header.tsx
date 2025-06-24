@@ -16,7 +16,7 @@ const Header = () => {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="sticky top-0 z-50 backdrop-blur-lg bg-white/80 border-b border-gray-200 shadow-sm"
+      className="sticky top-0 backdrop-blur-lg bg-white/80 border-b border-gray-200 shadow-sm z-[100]"
     >
       <header className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
@@ -51,8 +51,8 @@ const Header = () => {
             <Link href="/events" className="text-gray-800 hover:text-indigo-600 font-medium hover:underline hover:decoration-violet-500 text-lg transition-all duration-500">
               Events
             </Link>
-            <Link href="/my-tickets" className="text-gray-800 hover:text-indigo-600 font-medium hover:underline hover:decoration-violet-500 text-lg transition-all duration-500">
-              My Tickets
+            <Link href="/your-tickets" className="text-gray-800 hover:text-indigo-600 font-medium hover:underline hover:decoration-violet-500 text-lg transition-all duration-500">
+              Your Tickets
             </Link>
             <Link href={"/create-event"} className="text-gray-800 hover:text-indigo-600 font-medium hover:underline hover:decoration-violet-500 text-lg transition-all duration-500">
               Create Event
@@ -92,8 +92,8 @@ const Header = () => {
             <Link href="/events" className="text-gray-800 hover:text-indigo-600 font-medium text-base px-2 py-1" onClick={() => setMobileNavOpen(false)}>
               Events
             </Link>
-            <Link href="/my-tickets" className="text-gray-800 hover:text-indigo-600 font-medium text-base px-2 py-1" onClick={() => setMobileNavOpen(false)}>
-              My Tickets
+            <Link href="/your-tickets" className="text-gray-800 hover:text-indigo-600 font-medium text-base px-2 py-1" onClick={() => setMobileNavOpen(false)}>
+              Your Tickets
             </Link>
             <Link href="/create-event" className="text-gray-800 hover:text-indigo-600 font-medium text-base px-2 py-1" onClick={() => setMobileNavOpen(false)}>
               Create Event

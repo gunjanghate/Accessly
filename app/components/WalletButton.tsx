@@ -4,11 +4,11 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Wallet, ChevronDown, Copy, ExternalLink, LogOut, Check } from 'lucide-react';
 import { useWeb3 } from '@/context/Web3Context';
-// import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 export default function WalletButton() {
   const { address, isConnected, connectWallet, disconnectWallet } = useWeb3();
-  // const router = useRouter();
+  const router = useRouter();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -92,12 +92,12 @@ export default function WalletButton() {
                 Account
               </div>
 
-              {/* <button
-                onClick={() => router.push("/my-events")}
-                className="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-gray-50 rounded-lg transition-colors duration-150"
+              <button
+                onClick={() => router.push("/your-events")}
+                className="w-full flex items-center space-x-3 px-3 py-2 text-left hover:bg-gray-50 rounded-lg  font-semibold text-purple-500 hover:text-purple-800 transition-all duration-200"
               >
-                Your Events
-              </button> */}
+              🎪 Your Events
+              </button>
 
               <button
                 onClick={copyAddress}

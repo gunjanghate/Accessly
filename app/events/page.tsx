@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-
+import Link from "next/link";
 type EventData = {
   _id: string;
   eventName: string;
@@ -289,6 +289,7 @@ export default function EventsPage() {
                   )}
                 </span>
               </motion.button>
+
             </div>
           </div>
 

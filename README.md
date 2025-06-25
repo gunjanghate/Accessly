@@ -137,7 +137,7 @@ Pull requests are welcome! If you want to contribute to a module, please fork th
 Thanks to:
 
 * OpenZeppelin Contracts
-* NFT.storage
+* Pinata
 * Framer Motion
 * Shadcn UI
 

@@ -116,8 +116,13 @@ const MintFormTicket: React.FC<MintFormTicketProps> = ({ formData, setFormData }
 
 
     } catch (err: unknown) {
-      console.error("❌ Mint failed:", err);
-      if (err instanceof Error) {
+      if (
+        err instanceof Error &&
+        err.message.includes('could not decode result data') &&
+        err.message.includes('nextTokenId')
+      ) {
+        setError("Please connect your metamask wallet with filecoin network");
+      } else if (err instanceof Error) {
         setError(err.message);
       } else {
         setError("Mint failed.");

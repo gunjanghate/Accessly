@@ -6,6 +6,7 @@ import { FormData } from "@/types";
 import { uploadFileToPinata, uploadMetadataToPinata } from "@/lib/pinata";
 import { getTicketContract } from "@/lib/contract";
 import { ethers } from "ethers";
+import ShareToX from "./ShareToX";
 
 type MintFormTicketProps = {
   formData: FormData;
@@ -17,14 +18,28 @@ const MintFormTicket: React.FC<MintFormTicketProps> = ({ formData, setFormData }
   const [txHash, setTxHash] = useState("");
   const [error, setError] = useState("");
   const [uploading, setUploading] = useState(false);
+  const [xData, setxData] = useState<{
+    eventName: string;
+    date: string;
+    venue: string;
+    seatNumber: string;
+  }>({
+    eventName: "",
+    date: "",
+    venue: "",
+    seatNumber: "",
+  });
+
+  const [isSuccess, setIsSuccess] = useState(false)
+
   useEffect(() => {
-    
-  
+
+
     return () => {
       console.log("formData:", formData);
     }
   }, [])
-  
+
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -113,6 +128,13 @@ const MintFormTicket: React.FC<MintFormTicketProps> = ({ formData, setFormData }
         method: "PATCH",
       });
       console.log("✅ Event minted count updated");
+      setIsSuccess(true);
+      setxData({
+        eventName: formData.eventName,
+        date: formData.eventDate,
+        venue: formData.venue,
+        seatNumber: formData.seatNumber,
+      });
 
 
     } catch (err: unknown) {
@@ -321,8 +343,8 @@ const MintFormTicket: React.FC<MintFormTicketProps> = ({ formData, setFormData }
             type="submit"
             disabled={minting || uploading}
             className={`relative w-full py-4 px-6 rounded-xl font-semibold text-white text-lg transition-all duration-300 transform ${minting || uploading
-                ? "bg-gray-400 cursor-not-allowed scale-95"
-                : "bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 hover:scale-105 hover:shadow-xl active:scale-95"
+              ? "bg-gray-400 cursor-not-allowed scale-95"
+              : "bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 hover:scale-105 hover:shadow-xl active:scale-95"
               } shadow-lg`}
           >
             <div className="flex items-center justify-center space-x-3">
@@ -369,6 +391,15 @@ const MintFormTicket: React.FC<MintFormTicketProps> = ({ formData, setFormData }
                     </a>
                   </p>
                 </div>
+                {isSuccess && (
+                  <ShareToX
+                    title="🎟️ Just Minted My NFT Ticket on Accessly!"
+                    content={`I'm attending '${xData.eventName}' on ${xData.date} at ${xData.venue} 🎉 My seat: ${xData.seatNumber}. Mint yours now on Accessly — powered by Web3!`}
+                    hashtags={["Accessly", "NFTtickets", "Web3Events", "ProofOfAttendance", "Blockchain"]}
+                    url="https://accessly-self.vercel.app/events"
+                  />
+
+                )}
               </div>
             </div>
           )}

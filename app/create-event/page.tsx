@@ -4,6 +4,7 @@ import { useWeb3 } from "@/context/Web3Context";
 import MintTicketForm from "../components/EventForm";
 import { useRouter } from "next/navigation";
 import { Ticket } from "lucide-react";
+import ShareToX from "../components/ShareToX";
 const Page = () => {
   const router = useRouter();
   const { address, isConnected, isAdmin, connectWallet } = useWeb3();
@@ -162,6 +163,12 @@ const Page = () => {
       {/* Content */}
       <div className="relative z-10 p-6">
         <MintTicketForm />
+                      {/* <ShareToX
+                title="🎉 New Event Created on Accessly!"
+                content="Join us at the 'Accessly Launch Event' on June 25 in Bangalore. Mint your ticket now and be part of the future of decentralized ticketing!"
+                hashtags={["Accessly", "NFTtickets", "Web3", "ProofOfAttendance"]}
+                url="https://accessly-self.vercel.app/events"
+              /> */}
       </div>
     </div>
   );
